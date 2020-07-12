@@ -1,6 +1,7 @@
 package com.ga.designpatterns.controllers;
 
-import com.ga.designpatterns.dao.UserDao;
+import com.ga.designpatterns.dao.ItemDao;
+import com.ga.designpatterns.models.Item;
 import com.ga.designpatterns.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,32 +14,32 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping(value="users")
-public class UserController {
+@RequestMapping(value="items")
+public class ItemController {
     @Autowired
-    private UserDao userDao;
+    private ItemDao itemDao;
 
     @RequestMapping(value="")
     public String index(Model model) {
-        model.addAttribute("users", userDao.findAll());
-        return "users/index";
+        model.addAttribute("items", itemDao.findAll());
+        return "items/index";
     }
 
     @RequestMapping(value="add")
     public String addForm(Model model) {
-        model.addAttribute(new User());
+        model.addAttribute(new Item());
 
-        return "users/add";
+        return "items/add";
     }
 
     @RequestMapping(value="add", method = RequestMethod.POST)
-    public String processAdd(@ModelAttribute @Valid User newUser,
+    public String processAdd(@ModelAttribute @Valid Item newItem,
                              Errors errors, Model model) {
         if (errors.hasErrors()) {
-            return "users/add";
+            return "items/add";
         }
 
-        userDao.save(newUser);
+        itemDao.save(newItem);
         return "redirect:";
     }
 }

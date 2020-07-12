@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>SMS - Users - Add User</title>
+</head>
+<body>
+    <div><a href="/users">Back</a></div>
+    <h1>Add User</h1>
+    <form method="post" action="/users/add" th:object="${user}">
+        <table>
+            <tr>
+                <td><label th:for="name">Name</label>:</td>
+                <td><input th:field="*{name}" type="text" /></td>
+            </tr>
+            <tr>
+                <td colspan="2"><span th:errors="*{name}" /></td>
+            </tr>
+            <tr>
+                <td><label th:for="budget">Budget</label>:</td>
+                <td><input th:field="*{budget}" type="number" /></td>
+            </tr>
+            <tr>
+                <td colspan="2"><span th:errors="*{budget}" /></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" value="Add Item" /></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

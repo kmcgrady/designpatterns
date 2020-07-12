@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>SMS - Items</title>
+</head>
+<body>
+    <div><a href="/">Back</a></div>
+    <h1>Sales Management System - Items</h1>
+    <div><a href="/items/add">Add</a></div>
+    <ul>
+        <li th:each="item : ${items}" th:text="${item.getName()}"></li>
+    </ul>
+</body>
+</html>
