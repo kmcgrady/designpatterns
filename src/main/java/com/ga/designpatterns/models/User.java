@@ -17,10 +17,6 @@ import javax.validation.constraints.Size;
 public abstract class User {
     public final static int SENSITIVE_BUDGET = 5000;
 
-    @Autowired
-    @Transient
-    private SalesFunnelDao salesFunnelDao;
-
     @Id
     @GeneratedValue
     private int id;

@@ -1,10 +1,9 @@
 package com.ga.designpatterns.controllers;
 
-import com.ga.designpatterns.dao.SalesFunnelDao;
-import com.ga.designpatterns.dao.UserDao;
 import com.ga.designpatterns.models.SalesFunnel;
 import com.ga.designpatterns.models.User;
 import com.ga.designpatterns.services.SalesFunnelService;
+import com.ga.designpatterns.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -22,14 +21,14 @@ import java.util.Arrays;
 @RequestMapping(value="users")
 public class UserController {
     @Autowired
-    private UserDao userDao;
+    private UserService userService;
 
     @Autowired
     private SalesFunnelService salesFunnelService;
 
     @RequestMapping(value="")
     public String index(Model model) {
-        model.addAttribute("users", userDao.findAll());
+        model.addAttribute("users", userService.getAllUsers());
         return "users/index";
     }
 
@@ -43,20 +42,25 @@ public class UserController {
                              @RequestParam(value = "budget") int budget,
                              Model model) {
         SalesFunnel salesFunnel = salesFunnelService.createSalesFunnel();
-        userDao.save(User.createUser(name, budget, salesFunnel));
+        userService.createUser(name, budget, salesFunnel);
 
         return "redirect:";
     }
 
     @RequestMapping(value="{id}")
     public String show(@PathVariable int id, Model model) {
-        userDao.findById(id).ifPresent(user -> model.addAttribute("user", user));
+        User user = userService.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "User not found"
+                ));
+
+        model.addAttribute("user", user);
         return "users/show";
     }
 
     @RequestMapping(value="{id}/awareness", method = RequestMethod.POST)
     public String aware(@PathVariable int id, Model model) {
-        User user = userDao.findById(id)
+        User user = userService.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND, "User not found"
                 ));
@@ -71,7 +75,7 @@ public class UserController {
 
     @RequestMapping(value="{id}/interest", method = RequestMethod.POST)
     public String interest(@PathVariable int id, Model model) {
-        User user = userDao.findById(id)
+        User user = userService.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND, "User not found"
                 ));
@@ -86,7 +90,7 @@ public class UserController {
 
     @RequestMapping(value="{id}/decision", method = RequestMethod.POST)
     public String decision(@PathVariable int id, @RequestParam String competitors, Model model) {
-        User user = userDao.findById(id)
+        User user = userService.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND, "User not found"
                 ));
@@ -104,7 +108,7 @@ public class UserController {
                          @RequestParam(value = "numYearsInContract") int numYearsInContract,
                          @RequestParam(value = "chooseUs", required=false) boolean chooseUs,
                          Model model) {
-        User user = userDao.findById(id)
+        User user = userService.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND, "User not found"
                 ));

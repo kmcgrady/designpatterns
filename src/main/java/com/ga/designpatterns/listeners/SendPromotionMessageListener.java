@@ -16,7 +16,8 @@ public class SendPromotionMessageListener  implements StateChangeListener {
 
     public void stateChange(SalesFunnel funnel, SalesFunnelState fromState, SalesFunnelState toState) {
         if (toState.getName() == DecisionState.NAME) {
-            messageDao.save(new Message("Promotion", "You are about to decide. Here's a Promotion!"));
+            String name = funnel.getUser().getName();
+            messageDao.save(new Message("Promotion",  name + ", You are about to decide. Here's a Promotion!"));
         }
     }
 }

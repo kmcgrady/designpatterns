@@ -15,13 +15,14 @@ public class SendInterestMessageListener implements StateChangeListener {
 
     public void stateChange(SalesFunnel funnel, SalesFunnelState fromState, SalesFunnelState toState) {
         if (toState.getName() == InterestState.NAME) {
+            String name = funnel.getUser().getName();
             InterestState interestState = (InterestState) toState;
             if (interestState.getInterestType() == InterestState.InterestedStateType.NEW_CUSTOMER) {
-                messageDao.save(new Message("Interest", "Thank you for your interest! Here's some more information"));
+                messageDao.save(new Message("Interest", "Thank you for your interest " + name + "! Here's some more information"));
             } else if (interestState.getInterestType() == InterestState.InterestedStateType.RENEW_CUSTOMER) {
-                messageDao.save(new Message("Interest", "Thank you for using us! Would you like to renew?"));
+                messageDao.save(new Message("Interest", "Thank you for using us"  + name + "! Would you like to renew?"));
             } else if (interestState.getInterestType() == InterestState.InterestedStateType.WIN_CUSTOMER) {
-                messageDao.save(new Message("Interest", "We didn't get the sale. Can we win you over?"));
+                messageDao.save(new Message("Interest", "We didn't get the sale "  + name +  " :(. Can we win you over?"));
             }
         }
     }
