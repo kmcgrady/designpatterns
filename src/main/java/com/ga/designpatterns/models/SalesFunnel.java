@@ -47,7 +47,13 @@ public class SalesFunnel {
         return user;
     }
 
-    public SalesFunnelState getState() { return this.state; }
+    public SalesFunnelState getState() {
+        if (this.state.getName() != this.stateName) {
+            this.state = SalesFunnelState.stateFromName(this.stateName, this.stateMetadata);
+        }
+
+        return this.state;
+    }
     public void setState(SalesFunnelState state) {
         this.state = state;
         this.stateName = state.getName();
@@ -60,18 +66,18 @@ public class SalesFunnel {
     }
 
     public void aware() {
-        this.state.aware(this);
+        this.getState().aware(this);
     }
 
     public void interested() {
-        this.state.interested(this);
+        this.getState().interested(this);
     }
 
     public void deciding(List<String> competitors) {
-        this.state.deciding(this, competitors);
+        this.getState().deciding(this, competitors);
     }
 
     public void acted(int numYearsInContract, boolean didChooseUs) {
-        this.state.acted(this, numYearsInContract, didChooseUs);
+        this.getState().acted(this, numYearsInContract, didChooseUs);
     }
 }

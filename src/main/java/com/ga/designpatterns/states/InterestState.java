@@ -16,6 +16,7 @@ public class InterestState extends SalesFunnelState {
 
     public InterestState(String metadata) {
         super(NAME, metadata);
+        this.interestType = InterestedStateType.valueOf(metadata);
     }
 
     public InterestState(InterestedStateType interestType) {

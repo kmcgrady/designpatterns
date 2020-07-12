@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>SMS - User</title>
+</head>
+<body>
+<div><a href="/users">Back</a></div>
+<h1>Sales Management System - <span th:text="${user.getName()}" /></h1>
+<ul>
+    <li><strong>Budget: </strong><span th:text="${user.getBudget()}" /></li>
+    <li><strong>Sales Funnel State: </strong><span th:text="${user.getSalesFunnel().getStateName()}" /></li>
+    <li><strong>Sales Funnel Metadata: </strong><span th:text="${user.getSalesFunnel().getStateMetadata()}" /></li>
+</ul>
+<div>
+    <form method="POST" th:action="@{'/users/' + ${user.getId()} + '/awareness'}">
+        <input type="submit" value="Awareness" />
+    </form>
+</div>
+<div>
+    <form method="POST" th:action="@{'/users/' + ${user.getId()} + '/interest'}">
+        <input type="submit" value="Interest" />
+    </form>
+</div>
+<div>
+    <form method="POST" th:action="@{'/users/' + ${user.getId()} + '/decision'}">
+        <div><label th:for="competitors">Competitors</label>: <input type="text" th:name="competitors" /></div>
+        <div><input type="submit" value="Decision" /></div>
+    </form>
+</div>
+<div>
+    <form method="POST" th:action="@{'/users/' + ${user.getId()} + '/action'}">
+        <div><label th:for="numYearsInContract">Number of Years in Contract</label>: <input type="number" th:name="numYearsInContract" /></div>
+        <div><label th:for="chooseUs">Choose Us?</label>: <input type="checkbox" th:name="chooseUs" /></div>
+        <div><input type="submit" value="Action" /></div>
+    </form>
+</div>
+</body>
+</html>

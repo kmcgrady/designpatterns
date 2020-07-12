@@ -9,7 +9,7 @@
     <h1>Sales Management System - Users</h1>
     <div><a href="/users/add">Add</a></div>
     <ul>
-        <li th:each="user : ${users}" th:text="${user.getName()}"></li>
+        <li th:each="user : ${users}"><a th:href="@{'/users/' + ${user.getId()}}" th:text="${user.getName()}" /></li>
     </ul>
 </body>
 </html>

@@ -9,7 +9,6 @@ import java.util.List;
 public class DecisionState extends SalesFunnelState {
     public final static String NAME = "Decision";
     private List<String> competitors;
-    private String name = "Decision";
 
     public DecisionState() {
         super(NAME, "");
@@ -25,6 +24,8 @@ public class DecisionState extends SalesFunnelState {
     }
 
     public DecisionState(List<String> competitors) {
+        super(NAME, String.join(";", competitors));
+
         this.competitors = competitors;
     }
 

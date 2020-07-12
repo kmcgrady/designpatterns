@@ -50,6 +50,6 @@ public abstract class SalesFunnelState {
     }
 
     public void setMetadata(String metadata) {
-        // Do Nothing
+        this.metadata = metadata;
     }
 }
