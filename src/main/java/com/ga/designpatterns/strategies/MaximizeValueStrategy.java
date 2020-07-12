@@ -3,7 +3,7 @@ package com.ga.designpatterns.strategies;
 import com.ga.designpatterns.models.Item;
 import com.ga.designpatterns.models.ItemPackage;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.stream.Collectors;
@@ -15,7 +15,7 @@ public class MaximizeValueStrategy implements PackageStrategy {
 
         // Remove least expensive item one at a time.
         while (itemPackage.getTotalCost() > budget) {
-            Collection<Item> items = itemPackage.getItems();
+            List<Item> items = itemPackage.getItems();
             Item leastValuableItem = Collections.min(items, new Comparator<Item>() {
                 @Override
                 public int compare(Item o1, Item o2) {
@@ -23,7 +23,7 @@ public class MaximizeValueStrategy implements PackageStrategy {
                 }
             });
 
-            Collection<Item> newItemsInPackage = items.stream()
+            List<Item> newItemsInPackage = items.stream()
                     .filter(item -> item != leastValuableItem)
                     .collect(Collectors.toList());
             itemPackage = new ItemPackage(newItemsInPackage);

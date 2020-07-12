@@ -10,6 +10,7 @@
     <div><a href="/items/add">Add</a></div>
     <ul>
         <li th:each="item : ${items}" th:text="${item.getName()}"></li>
+        <li th:each="item : ${scItems}" th:text="${item.getName()}"></li>
     </ul>
 </body>
 </html>

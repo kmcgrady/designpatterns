@@ -1,8 +1,10 @@
 package com.ga.designpatterns.models;
 
+import com.ga.designpatterns.dao.SalesFunnelDao;
 import com.ga.designpatterns.models.users.PriceInsensitiveUser;
 import com.ga.designpatterns.models.users.PriceSensitiveUser;
 import com.ga.designpatterns.strategies.PackageStrategy;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -14,6 +16,10 @@ import javax.validation.constraints.Size;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class User {
     public final static int SENSITIVE_BUDGET = 5000;
+
+    @Autowired
+    @Transient
+    private SalesFunnelDao salesFunnelDao;
 
     @Id
     @GeneratedValue
@@ -27,10 +33,14 @@ public abstract class User {
     @Min(value=0, message = "Budget must be positive")
     private int budget;
 
+    @OneToOne
+    private SalesFunnel salesFunnel;
+
     public User() {}
-    public User(String name, int budget) {
+    public User(String name, int budget, SalesFunnel salesFunnel) {
         this.name = name;
         this.budget = budget;
+        this.salesFunnel = salesFunnel;
     }
 
     public int getId() {
@@ -49,12 +59,20 @@ public abstract class User {
         return budget;
     }
 
-    public static User createUser(String name, int budget) {
+    public SalesFunnel getSalesFunnel() {
+        return salesFunnel;
+    }
+
+    public void setSalesFunnel(SalesFunnel salesFunnel) {
+        this.salesFunnel = salesFunnel;
+    }
+
+    public static User createUser(String name, int budget, SalesFunnel salesFunnel) {
         if (budget < SENSITIVE_BUDGET) {
-            return new PriceSensitiveUser(name, budget);
-        } else {
-            return new PriceInsensitiveUser(name, budget);
+            return new PriceSensitiveUser(name, budget, salesFunnel);
         }
+
+        return new PriceInsensitiveUser(name, budget, salesFunnel);
     }
 
     public ItemPackage offerPackage() {

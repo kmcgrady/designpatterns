@@ -1,12 +1,22 @@
 package com.ga.designpatterns.models;
 
-import java.util.Collection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import java.util.List;
 
+@Entity
 public class ItemPackage {
-    private Collection<Item> items;
+    @Id
+    @GeneratedValue
+    private int id;
 
-    private ItemPackage() {}
-    public ItemPackage(Collection<Item> items) {
+    @ManyToMany
+    private List<Item> items;
+
+    public ItemPackage() {}
+    public ItemPackage(List<Item> items) {
         this.items = items;
     }
 
@@ -28,7 +38,7 @@ public class ItemPackage {
         return cost;
     }
 
-    public Collection<Item> getItems() {
+    public List<Item> getItems() {
         return this.items;
     }
 }

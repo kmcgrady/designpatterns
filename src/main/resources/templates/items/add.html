@@ -32,10 +32,7 @@
             </tr>
             <tr>
                 <td><label th:for="hasServiceContract">Has Service Contract</label>:</td>
-                <td><input th:field="*{hasServiceContract}" type="checkbox" /></td>
-            </tr>
-            <tr>
-                <td colspan="2"><span th:errors="*{hasServiceContract}" /></td>
+                <td><input th:name="hasServiceContract" type="checkbox" /></td>
             </tr>
             <tr>
                 <td colspan="2"><input type="submit" /></td>
