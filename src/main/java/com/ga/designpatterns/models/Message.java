@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
 
 @Table(name = "actions")
 @Entity
-public class Action {
+public class Message {
     @Id
     @GeneratedValue
     private int id;
@@ -22,8 +22,8 @@ public class Action {
     @Size(min=1, message = "Action Information must not be empty")
     private String action;
 
-    public Action() {}
-    public Action(String type, String action) {
+    public Message() {}
+    public Message(String type, String action) {
         this.type = type;
         this.action = action;
     }

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>SMS - Messages</title>
+</head>
+<body>
+    <div><a href="/">Back</a></div>
+    <h1>Sales Management System - Messages</h1>
+    <ul>
+        <li th:each="action : ${messages}">
+            <strong th:text="${messages.getType()}" /> - <span th:text="${messages.getAction()}" />
+        </li>
+    </ul>
+</body>
+</html>
