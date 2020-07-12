@@ -7,6 +7,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.Collection;
 
 @Table(name = "items")
 @Entity
@@ -37,6 +39,8 @@ public class Item {
         this.value = value;
         this.hasServiceContract = hasServiceContract;
     }
+
+    public static Collection<Item> getAll() { return new ArrayList<Item>(); }
 
     public int getId() {
         return id;

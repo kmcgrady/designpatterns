@@ -1,16 +1,20 @@
 package com.ga.designpatterns.models;
 
-import javax.persistence.Id;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Table;
+import com.ga.designpatterns.models.users.PriceInsensitiveUser;
+import com.ga.designpatterns.models.users.PriceSensitiveUser;
+import com.ga.designpatterns.strategies.PackageStrategy;
+
+import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Table(name = "users")
 @Entity
-public class User {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+public abstract class User {
+    public final static int SENSITIVE_BUDGET = 5000;
+
     @Id
     @GeneratedValue
     private int id;
@@ -45,7 +49,17 @@ public class User {
         return budget;
     }
 
-    public void setBudget(int budget) {
-        this.budget = budget;
+    public static User createUser(String name, int budget) {
+        if (budget < SENSITIVE_BUDGET) {
+            return new PriceSensitiveUser(name, budget);
+        } else {
+            return new PriceInsensitiveUser(name, budget);
+        }
     }
+
+    public ItemPackage offerPackage() {
+        return this.getStrategy().getItemPackage(this.budget);
+    }
+
+    public abstract PackageStrategy getStrategy();
 }

@@ -9,6 +9,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 
@@ -26,17 +27,17 @@ public class UserController {
 
     @RequestMapping(value="add")
     public String addForm(Model model) {
-        model.addAttribute(new User());
-
         return "users/add";
     }
 
     @RequestMapping(value="add", method = RequestMethod.POST)
-    public String processAdd(@ModelAttribute @Valid User newUser,
-                             Errors errors, Model model) {
-        if (errors.hasErrors()) {
-            return "users/add";
-        }
+    public String processAdd(@RequestParam(value = "name") String name,
+                             @RequestParam(value = "budget") int budget,
+                             Model model) {
+        User newUser = User.createUser(name, budget);
+//        if (errors.hasErrors()) {
+//            return "users/add";
+//        }
 
         userDao.save(newUser);
         return "redirect:";

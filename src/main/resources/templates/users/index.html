@@ -8,8 +8,8 @@
     <div><a href="/">Back</a></div>
     <h1>Sales Management System - Users</h1>
     <div><a href="/users/add">Add</a></div>
-    <ul th:each="user : ${users}">
-        <li th:text="${user.getName()}"></li>
+    <ul>
+        <li th:each="user : ${users}" th:text="${user.getName()}"></li>
     </ul>
 </body>
 </html>
