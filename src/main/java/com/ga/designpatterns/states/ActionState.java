@@ -17,7 +17,7 @@ public class ActionState extends SalesFunnelState {
         super(NAME, metadata);
 
         String[] dataArr = metadata.split(";");
-        SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM HH:mm:ss z yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy");
         try {
             this.yearsInContract = Integer.parseInt(dataArr[1]);
             this.didChooseUs = Boolean.parseBoolean(dataArr[2]);

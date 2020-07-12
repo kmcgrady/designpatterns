@@ -24,6 +24,10 @@ public class InterestState extends SalesFunnelState {
         this.interestType = interestType;
     }
 
+    public InterestedStateType getInterestType() {
+        return interestType;
+    }
+
     public void aware(SalesFunnel funnel) {
         // Don't do anything (user should already be aware)
     }

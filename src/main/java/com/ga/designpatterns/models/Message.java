@@ -7,7 +7,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@Table(name = "actions")
+@Table(name = "messages")
 @Entity
 public class Message {
     @Id

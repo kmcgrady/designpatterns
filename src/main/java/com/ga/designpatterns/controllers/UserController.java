@@ -4,6 +4,7 @@ import com.ga.designpatterns.dao.SalesFunnelDao;
 import com.ga.designpatterns.dao.UserDao;
 import com.ga.designpatterns.models.SalesFunnel;
 import com.ga.designpatterns.models.User;
+import com.ga.designpatterns.services.SalesFunnelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -24,7 +25,7 @@ public class UserController {
     private UserDao userDao;
 
     @Autowired
-    private SalesFunnelDao salesFunnelDao;
+    private SalesFunnelService salesFunnelService;
 
     @RequestMapping(value="")
     public String index(Model model) {
@@ -41,12 +42,8 @@ public class UserController {
     public String processAdd(@RequestParam(value = "name") String name,
                              @RequestParam(value = "budget") int budget,
                              Model model) {
-        SalesFunnel salesFunnel = new SalesFunnel();
-        this.salesFunnelDao.save(salesFunnel);
-
-        User newUser = User.createUser(name, budget, salesFunnel);
-
-        User createdUser = userDao.save(newUser);
+        SalesFunnel salesFunnel = salesFunnelService.createSalesFunnel();
+        userDao.save(User.createUser(name, budget, salesFunnel));
 
         return "redirect:";
     }
@@ -65,9 +62,9 @@ public class UserController {
                 ));
 
         model.addAttribute("user", user);
-        SalesFunnel salesFunnel = user.getSalesFunnel();
+        SalesFunnel salesFunnel = salesFunnelService.getSalesFunnelFromUser(user);
         salesFunnel.aware();
-        salesFunnelDao.save(salesFunnel);
+        salesFunnelService.saveSalesFunnel(salesFunnel);
 
         return "redirect:/users/" + id;
     }
@@ -79,9 +76,9 @@ public class UserController {
                         HttpStatus.NOT_FOUND, "User not found"
                 ));
 
-        SalesFunnel salesFunnel = user.getSalesFunnel();
+        SalesFunnel salesFunnel = salesFunnelService.getSalesFunnelFromUser(user);
         salesFunnel.interested();
-        salesFunnelDao.save(salesFunnel);
+        salesFunnelService.saveSalesFunnel(salesFunnel);
         model.addAttribute("user", user);
 
         return "redirect:/users/" + id;
@@ -94,9 +91,9 @@ public class UserController {
                         HttpStatus.NOT_FOUND, "User not found"
                 ));
 
-        SalesFunnel salesFunnel = user.getSalesFunnel();
+        SalesFunnel salesFunnel = salesFunnelService.getSalesFunnelFromUser(user);
         salesFunnel.deciding(new ArrayList<String>(Arrays.asList(competitors.split(";"))));
-        salesFunnelDao.save(salesFunnel);
+        salesFunnelService.saveSalesFunnel(salesFunnel);
         model.addAttribute("user", user);
 
         return "redirect:/users/" + id;
@@ -112,9 +109,9 @@ public class UserController {
                         HttpStatus.NOT_FOUND, "User not found"
                 ));
 
-        SalesFunnel salesFunnel = user.getSalesFunnel();
+        SalesFunnel salesFunnel = salesFunnelService.getSalesFunnelFromUser(user);
         salesFunnel.acted(numYearsInContract, chooseUs);
-        salesFunnelDao.save(salesFunnel);
+        salesFunnelService.saveSalesFunnel(salesFunnel);
         model.addAttribute("user", user);
 
         return "redirect:/users/" + id;

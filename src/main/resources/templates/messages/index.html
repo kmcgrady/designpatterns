@@ -8,8 +8,8 @@
     <div><a href="/">Back</a></div>
     <h1>Sales Management System - Messages</h1>
     <ul>
-        <li th:each="action : ${messages}">
-            <strong th:text="${messages.getType()}" /> - <span th:text="${messages.getAction()}" />
+        <li th:each="message : ${messages}">
+            <strong th:text="${message.getType()}" /> - <span th:text="${message.getAction()}" />
         </li>
     </ul>
 </body>
