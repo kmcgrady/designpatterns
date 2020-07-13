@@ -1,5 +1,6 @@
 package com.ga.designpatterns.controllers;
 
+import com.ga.designpatterns.models.ItemPackage;
 import com.ga.designpatterns.models.SalesFunnel;
 import com.ga.designpatterns.models.User;
 import com.ga.designpatterns.services.SalesFunnelService;
@@ -53,8 +54,11 @@ public class UserController {
                 .orElseThrow(() -> new ResponseStatusException(
                     HttpStatus.NOT_FOUND, "User not found"
                 ));
+        ItemPackage itemPackage = userService.getItemPackageForUser(user);
 
         model.addAttribute("user", user);
+        model.addAttribute("itemPackage", itemPackage);
+
         return "users/show";
     }
 

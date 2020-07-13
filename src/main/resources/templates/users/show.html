@@ -11,6 +11,15 @@
     <li><strong>Budget: </strong><span th:text="${user.getBudget()}" /></li>
     <li><strong>Sales Funnel State: </strong><span th:text="${user.getSalesFunnel().getStateName()}" /></li>
     <li><strong>Sales Funnel Metadata: </strong><span th:text="${user.getSalesFunnel().getStateMetadata()}" /></li>
+    <li>
+        <strong>Item Package:</strong>
+        <ul>
+            <li th:each="item : ${itemPackage.getItems()}">
+                <strong th:text="${item.getName()}" /> (Cost: <span th:text="${item.getCost()}" /> Value: <span th:text="${item.getValue()}" />)
+            </li>
+        </ul>
+    </li>
+
 </ul>
 <div>
     <form method="POST" th:action="@{'/users/' + ${user.getId()} + '/awareness'}">

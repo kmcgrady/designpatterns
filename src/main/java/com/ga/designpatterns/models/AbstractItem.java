@@ -17,15 +17,10 @@ public abstract class AbstractItem {
     @Size(min=1, message = "Name must not be empty")
     private String name;
 
-    @ManyToMany(mappedBy = "items")
-    private List<ItemPackage> packages;
-
     public AbstractItem() {}
     public AbstractItem(String name) {
         this.name = name;
     }
-
-    public static List<Item> getAll() { return new ArrayList<Item>(); }
 
     public int getId() {
         return id;

@@ -71,9 +71,5 @@ public abstract class User {
         return new PriceInsensitiveUser(name, budget, salesFunnel);
     }
 
-    public ItemPackage offerPackage() {
-        return this.getStrategy().getItemPackage(this.budget);
-    }
-
     public abstract PackageStrategy getStrategy();
 }

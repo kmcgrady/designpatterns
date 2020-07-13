@@ -9,9 +9,9 @@ import java.util.Comparator;
 import java.util.stream.Collectors;
 
 public class MaximizeCostStrategy implements PackageStrategy {
-    public ItemPackage getItemPackage(int budget) {
+    public ItemPackage getItemPackage(int budget, List<Item> fromItems) {
         // Start with all the items available
-        ItemPackage itemPackage = new ItemPackage(Item.getAll());
+        ItemPackage itemPackage = new ItemPackage(fromItems);
 
         // Remove least expensive item one at a time.
         while (itemPackage.getTotalCost() > budget) {

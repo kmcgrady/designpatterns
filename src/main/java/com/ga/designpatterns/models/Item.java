@@ -18,9 +18,6 @@ public class Item extends AbstractItem {
     @Min(value=0, message = "Value must be positive")
     private int value;
 
-    @ManyToMany(mappedBy = "items")
-    private List<ItemPackage> packages;
-
     public Item() {}
     public Item(String name, int cost, int value) {
         super(name);
