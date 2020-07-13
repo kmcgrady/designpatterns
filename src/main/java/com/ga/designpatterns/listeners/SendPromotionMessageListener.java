@@ -5,7 +5,6 @@ import com.ga.designpatterns.models.Message;
 import com.ga.designpatterns.models.SalesFunnel;
 import com.ga.designpatterns.states.DecisionState;
 import com.ga.designpatterns.states.SalesFunnelState;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class SendPromotionMessageListener  implements StateChangeListener {
     private MessageDao messageDao;

@@ -6,16 +6,18 @@ import com.ga.designpatterns.listeners.SendInterestMessageListener;
 import com.ga.designpatterns.listeners.SendPromotionMessageListener;
 import com.ga.designpatterns.models.SalesFunnel;
 import com.ga.designpatterns.models.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class SalesFunnelService {
-    @Autowired
-    private MessageDao messageDao;
+    private final MessageDao messageDao;
 
-    @Autowired
-    private SalesFunnelDao salesFunnelDao;
+    private final SalesFunnelDao salesFunnelDao;
+
+    public SalesFunnelService(MessageDao messageDao, SalesFunnelDao salesFunnelDao) {
+        this.messageDao = messageDao;
+        this.salesFunnelDao = salesFunnelDao;
+    }
 
     public SalesFunnel createSalesFunnel() {
         SalesFunnel salesFunnel = new SalesFunnel();

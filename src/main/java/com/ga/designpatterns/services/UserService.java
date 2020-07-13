@@ -5,7 +5,6 @@ import com.ga.designpatterns.dao.ServiceContractedItemDao;
 import com.ga.designpatterns.dao.UserDao;
 import com.ga.designpatterns.models.*;
 import com.ga.designpatterns.strategies.PackageStrategy;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,14 +13,17 @@ import java.util.Optional;
 
 @Service
 public class UserService {
-    @Autowired
-    private UserDao userDao;
+    private final UserDao userDao;
 
-    @Autowired
-    private ItemDao itemDao;
+    private final ItemDao itemDao;
 
-    @Autowired
-    private ServiceContractedItemDao serviceContractedItemDao;
+    private final ServiceContractedItemDao serviceContractedItemDao;
+
+    public UserService(UserDao userDao, ItemDao itemDao, ServiceContractedItemDao serviceContractedItemDao) {
+        this.userDao = userDao;
+        this.itemDao = itemDao;
+        this.serviceContractedItemDao = serviceContractedItemDao;
+    }
 
     public User createUser(String name, int budget, SalesFunnel salesFunnel) {
         User user = User.createUser(name, budget, salesFunnel);

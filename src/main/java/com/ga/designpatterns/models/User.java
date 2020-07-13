@@ -1,10 +1,8 @@
 package com.ga.designpatterns.models;
 
-import com.ga.designpatterns.dao.SalesFunnelDao;
 import com.ga.designpatterns.models.users.PriceInsensitiveUser;
 import com.ga.designpatterns.models.users.PriceSensitiveUser;
 import com.ga.designpatterns.strategies.PackageStrategy;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;

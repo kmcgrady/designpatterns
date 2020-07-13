@@ -5,7 +5,6 @@ import com.ga.designpatterns.models.SalesFunnel;
 import com.ga.designpatterns.models.User;
 import com.ga.designpatterns.services.SalesFunnelService;
 import com.ga.designpatterns.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,11 +20,14 @@ import java.util.Arrays;
 @Controller
 @RequestMapping(value="users")
 public class UserController {
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
-    @Autowired
-    private SalesFunnelService salesFunnelService;
+    private final SalesFunnelService salesFunnelService;
+
+    public UserController(UserService userService, SalesFunnelService salesFunnelService) {
+        this.userService = userService;
+        this.salesFunnelService = salesFunnelService;
+    }
 
     @RequestMapping(value="")
     public String index(Model model) {

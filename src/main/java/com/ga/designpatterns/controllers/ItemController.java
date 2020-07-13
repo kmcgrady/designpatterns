@@ -2,10 +2,8 @@ package com.ga.designpatterns.controllers;
 
 import com.ga.designpatterns.dao.ItemDao;
 import com.ga.designpatterns.dao.ServiceContractedItemDao;
-import com.ga.designpatterns.models.AbstractItem;
 import com.ga.designpatterns.models.Item;
 import com.ga.designpatterns.models.ServiceContractedItem;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -19,11 +17,14 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping(value="items")
 public class ItemController {
-    @Autowired
-    private ItemDao itemDao;
+    private final ItemDao itemDao;
 
-    @Autowired
-    private ServiceContractedItemDao serviceContractedItemDao;
+    private final ServiceContractedItemDao serviceContractedItemDao;
+
+    public ItemController(ItemDao itemDao, ServiceContractedItemDao serviceContractedItemDao) {
+        this.itemDao = itemDao;
+        this.serviceContractedItemDao = serviceContractedItemDao;
+    }
 
     @RequestMapping(value="")
     public String index(Model model) {
