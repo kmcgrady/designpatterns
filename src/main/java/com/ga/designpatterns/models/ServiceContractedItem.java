@@ -7,8 +7,8 @@ import javax.persistence.Table;
 @Table(name = "service_contracted_items")
 @Entity
 public class ServiceContractedItem extends AbstractItem {
-    public static double VALUE_MULTIPLIER = 1.3;
-    public static double COST_MULTIPLIER = 1.2;
+    public static double VALUE_MULTIPLIER = 0.5;
+    public static double COST_MULTIPLIER = 0.3;
 
     @OneToOne
     private Item item;
@@ -16,7 +16,7 @@ public class ServiceContractedItem extends AbstractItem {
     public ServiceContractedItem() {}
 
     public ServiceContractedItem(Item item) {
-        super(item.getName() + " (with Service Contract)");
+        super("Service Contract for " + item.getName());
         this.item = item;
     }
 

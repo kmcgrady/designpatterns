@@ -3,15 +3,15 @@ package com.ga.designpatterns.models;
 import java.util.List;
 
 public class ItemPackage {
-    private List<Item> items;
+    private List<AbstractItem> items;
 
-    public ItemPackage(List<Item> items) {
+    public ItemPackage(List<AbstractItem> items) {
         this.items = items;
     }
 
     public int getTotalCost() {
         int cost = 0;
-        for (Item item : this.getItems()) {
+        for (AbstractItem item : this.getItems()) {
             cost += item.getCost();
         }
 
@@ -20,14 +20,14 @@ public class ItemPackage {
 
     public int getTotalValue() {
         int cost = 0;
-        for (Item item : this.getItems()) {
+        for (AbstractItem item : this.getItems()) {
             cost += item.getValue();
         }
 
         return cost;
     }
 
-    public List<Item> getItems() {
+    public List<AbstractItem> getItems() {
         return this.items;
     }
 }
