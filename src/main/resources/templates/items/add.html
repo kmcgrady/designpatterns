@@ -11,21 +11,21 @@
         <table>
             <tr>
                 <td><label th:for="name">Name</label>:</td>
-                <td><input th:field="*{name}" type="text" /></td>
+                <td><input th:field="*{name}" type="text" required="true" /></td>
             </tr>
             <tr>
                 <td colspan="2"><span th:errors="*{name}" /></td>
             </tr>
             <tr>
                 <td><label th:for="cost">Cost</label>:</td>
-                <td><input th:field="*{cost}" type="number" /></td>
+                <td><input th:field="*{cost}" type="number" required="true" min="0" /></td>
             </tr>
             <tr>
                 <td colspan="2"><span th:errors="*{cost}" /></td>
             </tr>
             <tr>
                 <td><label th:for="value">Value</label>:</td>
-                <td><input th:field="*{value}" type="number" /></td>
+                <td><input th:field="*{value}" type="number" required="true" min="0" /></td>
             </tr>
             <tr>
                 <td colspan="2"><span th:errors="*{value}" /></td>

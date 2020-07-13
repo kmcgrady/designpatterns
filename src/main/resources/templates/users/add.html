@@ -11,11 +11,11 @@
         <table>
             <tr>
                 <td><label th:for="name">Name</label>:</td>
-                <td><input th:name="name" type="text" /></td>
+                <td><input th:name="name" type="text" required="true" /></td>
             </tr>
             <tr>
                 <td><label th:for="budget">Budget</label>:</td>
-                <td><input th:name="budget" type="number" /></td>
+                <td><input th:name="budget" type="number" required="true" min="1" /></td>
             </tr>
             <tr>
                 <td colspan="2"><input type="submit" value="Add User" /></td>
