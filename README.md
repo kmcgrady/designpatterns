@@ -29,39 +29,27 @@ spring.datasource.url=jdbc:h2:file:PATH/FOR/FILE
 
 This class explored 5 different design patterns:
 
-* Factory Pattern
-* Strategy Pattern
-* Observer Pattern
 * State Pattern
+* Observer Pattern
+* Strategy Pattern
+* Factory Pattern
 * Decorator Pattern
 
 To save time, a lot of the heavy lifting will be done for you.
 
-## Factory Pattern
+## State Pattern
 
-Take a look at `src/main/java/com.ga.designpatterns/models/User.java`, and look at Line 64. Complete the following method. Some pseudo code is provided for you:
+Our sales funnel has multiple states in `src/main/java/com.ga.designpatterns/states` directory. View each one to see how each one works. Compare it with the State Diagram we constructed in the example.
+
+Let's implement the state movement. Inside, `src/main/java/com.ga.designpatterns/models/SalesFunnel.java` implement the following methods:
 
 ```
-public static User createUser(String name, int budget, SalesFunnel salesFunnel)
+public void interested()
+public void deciding(List<String> competitors)
+public void acted(int numYearsInContract, boolean didChooseUs)
 ```
 
-Afterwards, let's update the `UserService` (located at `src/main/java/com.ga.designpatterns/services/UserService.java`) and update the code to use our factory method (Line 31).
-
-## Strategy Pattern
-
-First, take a look at each of the strategies for assembling an Item Package for the SalesFunnel. Look at the interface at `src/main/java/com.ga.designpatterns/strategies/PackageStrategy.java`. Next, take a look at the two strategies provided:
-
-* `src/main/java/com.ga.designpatterns/strategies/MaximizeCostStrategy.java`
-* `src/main/java/com.ga.designpatterns/strategies/MaximizeValueStrategy.java`
-
-They are very similar (and can possibly be abstracted more), but for now, they serve the purpose.
-
-Move on to `src/main/java/com.ga.designpatterns/models/User.java` and uncomment the value on line 73. This exposes a method we need to create for each of our user types.
-
-Update the following files to implement that method.
-
-* `src/main/java/com.ga.designpatterns/models/users/PriceSensitiveUser.java`
-* `src/main/java/com.ga.designpatterns/models/users/PriceInsensitiveUser.java`
+**TIP** Be sure to check out the `aware` method for a hint on how to implement the rest.
 
 ## Observer Pattern
 
@@ -82,19 +70,31 @@ Make use of `ArrayList`'s methods `add` and `remove` to make the last two method
 
 To see it in action, take a look at `src/main/java/com.ga.designpatterns/services/SalesFunnelService.java`. Note that we add the listeners after we create or retrieve a `SalesFunnel`. We do not save persist listeners, so we need to ensure we add them every time.
 
-## State Pattern
+## Strategy Pattern
 
-Our sales funnel has multiple states in `src/main/java/com.ga.designpatterns/states` directory. View each one to see how each one works. Compare it with the State Diagram we constructed in the example.
+First, take a look at each of the strategies for assembling an Item Package for the SalesFunnel. Look at the interface at `src/main/java/com.ga.designpatterns/strategies/PackageStrategy.java`. Next, take a look at the two strategies provided:
 
-Let's implement the state movement. Inside, `src/main/java/com.ga.designpatterns/models/SalesFunnel.java` implement the following methods:
+* `src/main/java/com.ga.designpatterns/strategies/MaximizeCostStrategy.java`
+* `src/main/java/com.ga.designpatterns/strategies/MaximizeValueStrategy.java`
+
+They are very similar (and can possibly be abstracted more), but for now, they serve the purpose.
+
+Move on to `src/main/java/com.ga.designpatterns/models/User.java` and uncomment the value on line 73. This exposes a method we need to create for each of our user types.
+
+Update the following files to implement that method.
+
+* `src/main/java/com.ga.designpatterns/models/users/PriceSensitiveUser.java`
+* `src/main/java/com.ga.designpatterns/models/users/PriceInsensitiveUser.java`
+
+## Factory Pattern
+
+Take a look at `src/main/java/com.ga.designpatterns/models/User.java`, and look at Line 64. Complete the following method. Some pseudo code is provided for you:
 
 ```
-public void interested()
-public void deciding(List<String> competitors)
-public void acted(int numYearsInContract, boolean didChooseUs)
+public static User createUser(String name, int budget, SalesFunnel salesFunnel)
 ```
 
-**TIP** Be sure to check out the `aware` method for a hint on how to implement the rest.
+Afterwards, let's update the `UserService` (located at `src/main/java/com.ga.designpatterns/services/UserService.java`) and update the code to use our factory method (Line 31).
 
 ## Decorator Pattern
 
