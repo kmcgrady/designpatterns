@@ -2,11 +2,10 @@ package com.ga.designpatterns.models.users;
 
 import com.ga.designpatterns.models.SalesFunnel;
 import com.ga.designpatterns.models.User;
-import com.ga.designpatterns.strategies.MaximizeValueStrategy;
+import com.ga.designpatterns.strategies.MaximizeCostStrategy;
 import com.ga.designpatterns.strategies.PackageStrategy;
 
 import javax.persistence.Entity;
-import javax.persistence.Table;
 
 @Entity
 public class PriceInsensitiveUser extends User {
@@ -15,7 +14,6 @@ public class PriceInsensitiveUser extends User {
         super(name, budget, salesFunnel);
     }
 
-    public PackageStrategy getStrategy() {
-        return new MaximizeValueStrategy();
-    }
+    // TODO
+    // Override getStrategy() to use the MaximizeCostStrategy.
 }

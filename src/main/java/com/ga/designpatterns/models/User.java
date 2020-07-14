@@ -61,13 +61,14 @@ public abstract class User {
         this.salesFunnel = salesFunnel;
     }
 
-    public static User createUser(String name, int budget, SalesFunnel salesFunnel) {
-        if (budget < SENSITIVE_BUDGET) {
-            return new PriceSensitiveUser(name, budget, salesFunnel);
-        }
+//    TODO Factory Pattern
+//    public static User createUser(String name, int budget, SalesFunnel salesFunnel) {
+//        if the budget is less than our threshold for a sensitive budget
+//             return a new price sensitive user.
+//        otherwise
+//             return a price insensitive user.
+//    }
 
-        return new PriceInsensitiveUser(name, budget, salesFunnel);
-    }
-
-    public abstract PackageStrategy getStrategy();
+//    TODO Strategy Pattern
+//    public abstract PackageStrategy getStrategy();
 }

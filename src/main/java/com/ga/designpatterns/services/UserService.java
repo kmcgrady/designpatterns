@@ -4,6 +4,7 @@ import com.ga.designpatterns.dao.ItemDao;
 import com.ga.designpatterns.dao.ServiceContractedItemDao;
 import com.ga.designpatterns.dao.UserDao;
 import com.ga.designpatterns.models.*;
+import com.ga.designpatterns.models.users.PriceInsensitiveUser;
 import com.ga.designpatterns.strategies.PackageStrategy;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +27,8 @@ public class UserService {
     }
 
     public User createUser(String name, int budget, SalesFunnel salesFunnel) {
-        User user = User.createUser(name, budget, salesFunnel);
+        // TODO
+        User user = new PriceInsensitiveUser(name, budget, salesFunnel);
         return this.userDao.save(user);
     }
 
@@ -39,11 +41,13 @@ public class UserService {
     }
 
     public ItemPackage getItemPackageForUser(User user) {
-        PackageStrategy strategy = user.getStrategy();
         List<AbstractItem> allItems = new ArrayList<AbstractItem>();
         itemDao.findAll().forEach(allItems::add);
         serviceContractedItemDao.findAll().forEach(allItems::add);
 
-        return strategy.getItemPackage(user.getBudget(), allItems);
+        // TODO
+        // Use strategy from the user
+
+        return new ItemPackage(allItems);
     }
 }

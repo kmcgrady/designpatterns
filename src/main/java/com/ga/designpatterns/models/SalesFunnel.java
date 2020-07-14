@@ -84,29 +84,30 @@ public class SalesFunnel {
         this.getState().aware(this);
     }
 
+    // TODO State Pattern
     public void interested() {
-        this.getState().interested(this);
+
     }
 
     public void deciding(List<String> competitors) {
-        this.getState().deciding(this, competitors);
+
     }
 
     public void acted(int numYearsInContract, boolean didChooseUs) {
-        this.getState().acted(this, numYearsInContract, didChooseUs);
+
     }
 
+    // TODO Observer Pattern implement the following methods
     private void notifyListeners(SalesFunnelState previousState, SalesFunnelState nextState) {
-        for(StateChangeListener listener: this.listeners) {
-            listener.stateChange(this, previousState, nextState);
-        }
+        // for each listener
+        //    notify of the change in state.
     }
 
     public void addStateChangeListener(StateChangeListener listener) {
-        this.listeners.add(listener);
+        // Add the listener to the listener instance variable
     }
 
     public void removeStateChangeListener(StateChangeListener listener) {
-        this.listeners.remove(listener);
+        // Remove the listener to the listener instance variable
     }
 }
