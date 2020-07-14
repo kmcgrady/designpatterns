@@ -2,6 +2,7 @@ package com.ga.designpatterns.models.users;
 
 import com.ga.designpatterns.models.SalesFunnel;
 import com.ga.designpatterns.models.User;
+import com.ga.designpatterns.strategies.MaximizeCostStrategy;
 import com.ga.designpatterns.strategies.MaximizeValueStrategy;
 import com.ga.designpatterns.strategies.PackageStrategy;
 
@@ -15,5 +16,8 @@ public class PriceSensitiveUser extends User {
     }
 
     // TODO
-    // Override getStrategy() to use the MaximizeValueStrategy.
+    @Override
+    public PackageStrategy getStrategy() {
+        return new MaximizeValueStrategy();
+    }
 }

@@ -23,21 +23,21 @@ public class ServiceContractedItem extends AbstractItem {
     // TODO Decorator Pattern
     @Override
     public int getValue() {
-        return 0;
+        return (int) (this.item.getValue() * VALUE_MULTIPLIER);
     }
 
     @Override
     public void setValue(int value) {
-
+        this.item.setValue((int) (value / COST_MULTIPLIER));
     }
 
     @Override
     public int getCost() {
-        return 100;
+        return (int) (this.item.getCost() * COST_MULTIPLIER);
     }
 
     @Override
     public void setCost(int cost) {
-
+        this.item.setCost((int) (cost / COST_MULTIPLIER));
     }
 }

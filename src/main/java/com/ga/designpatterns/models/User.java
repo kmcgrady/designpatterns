@@ -63,17 +63,18 @@ public abstract class User {
     }
 
 //    TODO Factory Pattern
-//    public static User createUser(String name, int budget, SalesFunnel salesFunnel) {
-//        if the budget is less than our threshold for a sensitive budget
-//             return a new price sensitive user.
-//        otherwise
-//             return a price insensitive user.
-//    }
+    public static User createUser(String name, int budget, SalesFunnel salesFunnel) {
+        if (budget < SENSITIVE_BUDGET) {
+            return new PriceSensitiveUser(name, budget, salesFunnel);
+        } else {
+            return new PriceInsensitiveUser(name, budget, salesFunnel);
+        }
+    }
 
 //    TODO Strategy Pattern
-//    public abstract PackageStrategy getStrategy();
+    public abstract PackageStrategy getStrategy();
 
     public ItemPackage offerPackage(List<AbstractItem> allItems) {
-        return new ItemPackage(allItems);
+        return this.getStrategy().getItemPackage(this.budget, allItems);
     }
 }

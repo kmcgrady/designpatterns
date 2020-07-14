@@ -28,7 +28,7 @@ public class UserService {
 
     public User createUser(String name, int budget, SalesFunnel salesFunnel) {
         // TODO
-        User user = new PriceInsensitiveUser(name, budget, salesFunnel);
+        User user = User.createUser(name, budget, salesFunnel);
         return this.userDao.save(user);
     }
 

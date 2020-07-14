@@ -15,5 +15,8 @@ public class PriceInsensitiveUser extends User {
     }
 
     // TODO
-    // Override getStrategy() to use the MaximizeCostStrategy.
+    @Override
+    public PackageStrategy getStrategy() {
+        return new MaximizeCostStrategy();
+    }
 }
