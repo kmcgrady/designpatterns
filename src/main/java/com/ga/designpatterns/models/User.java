@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Table(name = "users")
 @Entity
@@ -71,4 +72,8 @@ public abstract class User {
 
 //    TODO Strategy Pattern
 //    public abstract PackageStrategy getStrategy();
+
+    public ItemPackage offerPackage(List<AbstractItem> allItems) {
+        return new ItemPackage(allItems);
+    }
 }

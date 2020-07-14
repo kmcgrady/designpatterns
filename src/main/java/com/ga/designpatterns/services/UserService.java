@@ -45,9 +45,6 @@ public class UserService {
         itemDao.findAll().forEach(allItems::add);
         serviceContractedItemDao.findAll().forEach(allItems::add);
 
-        // TODO
-        // Use strategy from the user
-
-        return new ItemPackage(allItems);
+        return user.offerPackage(allItems);
     }
 }

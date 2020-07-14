@@ -86,6 +86,8 @@ Update the following files to implement that method.
 * `src/main/java/com.ga.designpatterns/models/users/PriceSensitiveUser.java`
 * `src/main/java/com.ga.designpatterns/models/users/PriceInsensitiveUser.java`
 
+Finally, update the `offerPackage` method below to use the strategy from `getStrategy`. You can see it in action on line 48 of the `src/main/java/com.ga.designpatterns/services/UserService.java`.
+
 ## Factory Pattern
 
 Take a look at `src/main/java/com.ga.designpatterns/models/User.java`, and look at Line 64. Complete the following method. Some pseudo code is provided for you:
